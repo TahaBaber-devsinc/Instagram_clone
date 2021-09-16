@@ -1,0 +1,18 @@
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Edit Caption</h2>
+    <div class= "sign-up-text">    Change caption of the post here</div>
+    <hr>
+    <br>
+    <%= form_with model: @post do |f| %>
+      <div class="field">
+        <%= f.text_field :body,  placeholder: "Add Caption", class: "form-control"%>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update Caption" , class: "btn btn-primary full-width"%>
+      </div>
+    <% end %>
+    <br>
+    <hr>
+  </div>
+</div>

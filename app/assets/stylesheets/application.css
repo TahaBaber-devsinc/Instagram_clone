@@ -12,8 +12,19 @@
  *
  *= require_tree .
  *= require_self
+ *= require flickity
  */
+<<<<<<< Updated upstream
+=======
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Style+Script&display=swap");
 
 body {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: rgba(0, 0, 0, 0.03);
+  font-family: "Lato", sans-serif;
+  padding: 1%;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+>>>>>>> Stashed changes

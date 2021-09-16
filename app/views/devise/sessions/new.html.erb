@@ -1,15 +1,19 @@
-<h2>Log in</h2>
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Instagram</h2>
+    <div class= "sign-up-text">    Log in to see photos and videos from your friends.</div>
+    <hr>
+    <br>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , placeholder: "Email Address", class: "form-control"%>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password" , placeholder: "Password", class: "form-control"%>
   </div>
+  <br>
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
@@ -19,8 +23,12 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in" , class: "btn btn-primary full-width"%>
+
   </div>
 <% end %>
-
+<br>
+<hr>
 <%= render "devise/shared/links" %>
+  </div>
+</div>

@@ -1,6 +1,67 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-body {
-  background-color: black;
+.user-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: stretch;
+  .button_to {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+.profile-pic {
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  padding: 3%;
+  object-fit: cover;
+}
+.profile-pic-div {
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-basis: 26%;
+  h6 {
+    //margin-bottom: 5%;
+  }
+  h3 {
+    margin: 0%;
+  }
+}
+.count-info-flex {
+  display: flex;
+  align-items: center;
+  //height: 100%;
+  justify-content: space-between;
+}
+.user-page-posts {
+  padding: 0 20%;
+}
+
+.user-posts {
+  margin-top: 3%;
+}
+
+.user-post-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .button_to {
+    margin-left: auto;
+  }
+  h2 {
+    margin-left: auto;
+  }
+}
+
+.add-post-btn {
+  margin-left: auto;
+}
+
+.post-pic {
+  object-fit: scale-down;
 }

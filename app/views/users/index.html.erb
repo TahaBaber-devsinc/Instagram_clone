@@ -1,8 +1,8 @@
 <h1>Users#index</h1>
 <% @users.each do |user| %>
-<%= user.attributes.each do |key, value| %>
-<%= key%>: <%=value%> <br>
-<%end%><br><hr>
-
+  <%= user.attributes.each do |key, value| %>
+    <%= key%>: <%=value%> <br>
+  <%end%><br>
+  <hr>
 <%end%>
 <%= image_tag @u.image%>

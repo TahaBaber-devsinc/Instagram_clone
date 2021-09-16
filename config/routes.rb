@@ -1,11 +1,22 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'followship/create'
-  get 'followship/destroy'
+<<<<<<< Updated upstream
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+=======
+  resources :likes
+  resources :posts do
+    resources :comments, shallow: true
+  end
+
+  post 'followship/create'
+  delete 'followship/destroy'
+  get 'followship/followers'
+  get 'followship/followees'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :users do
+    resource :profile_picture
+  end
 
   root to: 'users#index'
+>>>>>>> Stashed changes
 end

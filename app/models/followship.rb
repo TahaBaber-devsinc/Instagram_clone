@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Followship < ApplicationRecord
   # Validations
   validates :user_id, presence: true
