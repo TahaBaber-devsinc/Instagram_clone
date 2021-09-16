@@ -7,10 +7,22 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+<<<<<<< Updated upstream
+=======
+  <% if user_signed_in? %>
+  <h1>ID: <%= current_user.id%></h1>
+  <h1>Mail: <%= current_user.email%></h1>
+  <%= button_to 'sign out', destroy_user_session_path, method: :delete , class: "btn btn-warning"%>
+  <%else%>
+  <%= button_to 'sign in', new_user_session_path, method: :get, class: "btn btn-warning"%>
+  <% end %>
+  <%= render 'flash_messages'%>
+>>>>>>> Stashed changes
     <%= yield %>
   </body>
 </html>
