@@ -14,8 +14,6 @@
  *= require_self
  *= require flickity
  */
-<<<<<<< Updated upstream
-=======
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Style+Script&display=swap");
 
 body {
@@ -27,4 +25,3 @@ a {
   text-decoration: none;
   color: inherit;
 }
->>>>>>> Stashed changes

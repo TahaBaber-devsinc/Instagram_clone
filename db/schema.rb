@@ -12,17 +12,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 0) do
-
-=======
 ActiveRecord::Schema.define(version: 20_210_908_140_828) do
->>>>>>> Stashed changes
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
-<<<<<<< Updated upstream
-=======
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -111,5 +104,4 @@ ActiveRecord::Schema.define(version: 20_210_908_140_828) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
->>>>>>> Stashed changes
 end

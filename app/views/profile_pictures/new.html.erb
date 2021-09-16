@@ -1,2 +1,18 @@
-<h1>ProfilePictures#new</h1>
-<p>Find me in app/views/profile_pictures/new.html.erb</p>
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Update Profile Picture</h2>
+    <div class= "sign-up-text"> Update Profile Picture to show on profile</div>
+    <hr>
+    <br>
+    <%= form_with(model: @user , url: user_profile_picture_path(@user.id)) do |f| %>
+      <div class="field input-group">
+        <%= f.file_field :image, class: "form-control"%>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update Picture" , class: "btn btn-primary full-width"%>
+      </div>
+    <% end %>
+    <br>
+    <hr>
+  </div>
+</div>

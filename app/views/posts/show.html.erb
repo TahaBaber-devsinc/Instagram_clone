@@ -13,9 +13,9 @@
   <b>likes</b>
   <div class= "post-btn">
     <%if @post.likes.exists?(user_id: current_user.id)%>
-      <%= button_to 'Liked',like_path(like_id: @post.likes.find_by(user_id: current_user.id), id: @post.id, type: "Post") , method: :delete, class: "btn btn-danger "%>
+      <%= button_to 'Liked',like_path(like_id: @post.likes.find_by(user_id: current_user.id), id: @post.id, type: "Post"), method: :delete, class: "btn btn-danger post-like ", remote: true, local: false%>
     <%else%>
-      <%= button_to 'Like',likes_path(id: @post.id, type: "Post") , method: :post, class: "btn btn-outline-danger "%>
+      <%= button_to 'Like',likes_path(id: @post.id, type: "Post") , method: :post, class: "btn btn-outline-danger post-like", remote: true%>
     <%end%>
     <%if @post.user_id == current_user.id%>
       <div class= "del-upd-btn">

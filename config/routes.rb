@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< Updated upstream
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-=======
   resources :likes
   resources :posts do
     resources :comments, shallow: true
@@ -18,5 +15,4 @@ Rails.application.routes.draw do
   end
 
   root to: 'users#index'
->>>>>>> Stashed changes
 end
