@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilePicturesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
@@ -5,9 +7,7 @@ class ProfilePicturesController < ApplicationController
 
   def show; end
 
-  def edit
-    
-  end
+  def edit; end
 
   def update
     @user = User.find(params[:user_id])

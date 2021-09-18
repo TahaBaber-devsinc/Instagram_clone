@@ -7,11 +7,13 @@ class FollowshipController < ApplicationController
     puts "\n\n\nhere\n\n\n\n"
     @followship = current_user.followships.build(following_id: params[:following_id])
     flash[:notice] = 'Could not follow' unless @followship.save
+    redirect_to user_path(params[:following_id])
   end
 
   def destroy
     @followship = current_user.followships.find_by_following_id(params[:following_id])
     @followship.destroy
+    redirect_to user_path(params[:following_id])
   end
 
   def followers
@@ -25,7 +27,6 @@ class FollowshipController < ApplicationController
   private
 
   def follow_check
-    puts "\n\n\nhere\n\n\n\n"
     if current_user.followships.exists?(following_id: params[:following_id])
 
       flash[:notice] = 'Already Following this user'

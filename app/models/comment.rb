@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   # Associations
-  has_many :likes, as: :likable
+  has_many :likes, as: :likable, dependent: :destroy
 
   belongs_to :user
   belongs_to :post

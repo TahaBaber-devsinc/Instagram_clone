@@ -37,6 +37,12 @@ gem 'devise', '~> 4.8'
 gem 'activestorage-cloudinary-service'
 gem 'cloudinary', require: false
 
+gem 'pundit'
+
+gem 'sidekiq'
+
+gem 'redis', '~> 4.4'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite

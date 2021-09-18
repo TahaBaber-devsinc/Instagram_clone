@@ -1,0 +1,17 @@
+<div class= "post-body">
+  <h1 class="text-center logo">Stories</h1>
+  <!-- Flickity HTML init -->
+  <div class="carousel " data-flickity='{ "freeScroll": true }'>
+    <%@stories.each do |story|%>
+      <div class="carousel-cell d-flex ">
+        <%=image_tag story.image, class: "post-pic "%>
+        <div class="story">
+          <%= button_to 'Delete', user_story_path(id: story.id), method: :delete, class: "btn btn-danger "%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+<%@stories.each do |story|%>
+  <%=story.expiry%> <br>
+<%end%>

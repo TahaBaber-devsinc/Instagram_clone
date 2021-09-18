@@ -1,0 +1,18 @@
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Add Story</h2>
+    <div class= "sign-up-text"> Add Story to show on profile</div>
+    <hr>
+    <br>
+    <%= form_with model: @story, url: user_stories_path  do |f| %>
+      <div class="field input-group">
+        <%= f.file_field :image, class: "form-control"%>
+      </div>
+      <div class="actions">
+        <%= f.submit "Add Story" , class: "btn btn-primary full-width"%>
+      </div>
+    <% end %>
+    <br>
+    <hr>
+  </div>
+</div>

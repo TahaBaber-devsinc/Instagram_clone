@@ -18,7 +18,11 @@ class CommentsController < ApplicationController
     redirect_to new_post_comment_path
   end
 
-  def destroy; end
+  def destroy
+    @comment = Comment.find(params[:id])
+    flash[:notice] = 'Cannot destroy' unless @comment.destroy
+    redirect_to @comment.post
+  end
 
   def edit
     @comment = current_user.comments.find_by_id(params[:id])

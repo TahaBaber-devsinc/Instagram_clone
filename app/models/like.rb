@@ -6,4 +6,5 @@ class Like < ApplicationRecord
 
   # Associations
   belongs_to :likable, polymorphic: true
+  belongs_to :user
 end

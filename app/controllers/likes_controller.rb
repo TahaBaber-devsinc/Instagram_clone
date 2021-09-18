@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     when 'Post'
       @like = @post.likes.new(user_id: current_user.id)
       flash[:notice] = 'Could not like the Post' unless @like.save
-      redirect_to @post
+      # redirect_to @post
 
     when 'Comment'
       @like = @comment.likes.new(user_id: current_user.id)

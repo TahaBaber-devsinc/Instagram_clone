@@ -35,15 +35,18 @@
     <%=comment.likes.count%> <b>likes</b>
     <div class="post-btn">
       <%if comment.likes.exists?(user_id: current_user.id)%>
-        <%= button_to 'Liked',like_path(id: comment.id, type: "Comment", like_id: comment.likes.find_by_user_id(current_user.id)) , method: :delete, class: "btn btn-danger "%>
+        <%= button_to 'Liked',like_path(id: comment.id, type: "Comment", like_id: comment.likes.find_by_user_id(current_user.id)) , method: :delete, class: "btn btn-danger ", remote: true%>
       <%else%>
-        <%= button_to 'Like',likes_path(id: comment.id, type: "Comment") , method: :post, class: "btn btn-outline-danger "%>
+        <%= button_to 'Like',likes_path(id: comment.id, type: "Comment") , method: :post, class: "btn btn-outline-danger ", remote: true%>
       <%end%>
       <%if comment.user == current_user%>
         <div class="del-upd-btn">
-          <%= button_to 'Delete', @post, method: :delete, class: "btn btn-danger "%>
+          <%= button_to 'Delete', comment, method: :delete, class: "btn btn-danger "%>
           <%= button_to 'Update',edit_comment_path(comment.id) , method: :get, class: "btn btn-warning "%>
         </div>
+      <%end%>
+      <%if @post.user == current_user && comment.user != current_user%>
+        <%= button_to 'Delete', comment, method: :delete, class: "btn btn-danger "%>
       <%end%>
     </div>
     <hr>

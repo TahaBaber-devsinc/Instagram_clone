@@ -6,12 +6,12 @@ class Post < ApplicationRecord
   validate :image_presence
 
   # Associations
-  has_many :comments
-  has_many :likes, as: :likable
+  has_many :comments, dependent: :destroy
+  has_many :likes, as: :likable, dependent: :destroy
 
   belongs_to :user
 
-  has_many_attached :images
+  has_many_attached :images, dependent: :destroy
 
   private
 

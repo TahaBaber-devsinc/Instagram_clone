@@ -7,5 +7,9 @@ class Story < ApplicationRecord
   # associations
   belongs_to :user
 
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
+
+  after_initialize do
+    self.expiry ||= 24.hours.from_now
+  end
 end
