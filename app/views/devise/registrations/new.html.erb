@@ -1,0 +1,33 @@
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Instagram</h2>
+    <div class= "sign-up-text">    Sign up to see photos and videos from your friends.</div>
+    <hr>
+    <br>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" , placeholder: "Email Address", class: "form-control"%>
+      </div>
+      <div class="field">
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "Username" , class: "form-control"%>
+      </div>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "new-password" , placeholder: "Password", class: "form-control"%>
+      </div>
+      <div class="field">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" , placeholder: "Confirm Password", class: "form-control"%>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit "Sign up" , class: "btn btn-primary full-width"%>
+      </div>
+      <br>
+      <h6 class="terms-text">
+        By signing up, you agree to our <b>Terms</b> , <b>Data Policy</b> and <b>Cookies Policy</b> .
+      </h6>
+    <% end %>
+    <hr>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

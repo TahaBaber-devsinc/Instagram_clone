@@ -1,0 +1,34 @@
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo">Instagram</h2>
+    <div class= "sign-up-text">    Log in to see photos and videos from your friends.</div>
+    <hr>
+    <br>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , placeholder: "Email Address", class: "form-control"%>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "current-password" , placeholder: "Password", class: "form-control"%>
+  </div>
+  <br>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in" , class: "btn btn-primary full-width"%>
+
+  </div>
+<% end %>
+<br>
+<hr>
+<%= render "devise/shared/links" %>
+  </div>
+</div>

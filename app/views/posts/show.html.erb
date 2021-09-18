@@ -1,0 +1,54 @@
+<div class= "post-body">
+  <h1 class="text-center logo">Post</h1>
+  <!-- Flickity HTML init -->
+  <div class="carousel " data-flickity='{ "freeScroll": true }'>
+    <%@post.images.each do |image|%>
+      <%= image_tag(image, class: "post-pic border carousel-cell")%>
+    <%end%>
+  </div>
+  <h3><%=@post.user.username%></h3>
+  <%=@post.body%>
+  <br>
+  <%=@post.likes.count%>
+  <b>likes</b>
+  <div class= "post-btn">
+    <%if @post.likes.exists?(user_id: current_user.id)%>
+      <%= button_to 'Liked',like_path(like_id: @post.likes.find_by(user_id: current_user.id), id: @post.id, type: "Post"), method: :delete, class: "btn btn-danger post-like ", remote: true, local: false%>
+    <%else%>
+      <%= button_to 'Like',likes_path(id: @post.id, type: "Post") , method: :post, class: "btn btn-outline-danger post-like", remote: true%>
+    <%end%>
+    <%if @post.user_id == current_user.id%>
+      <div class= "del-upd-btn">
+        <%= button_to 'Delete', @post, method: :delete, class: "btn btn-danger "%>
+        <%= button_to 'Update',edit_post_path , method: :get, class: "btn btn-warning "%>
+      </div>
+    <%end%>
+  </div>
+  <hr>
+  <div class="add-comment-btn">
+    <h2 >Comments</h2>
+    <%= button_to 'Add Comment',new_post_comment_path(@post) , method: :get, class: "btn btn-outline-dark add-comment-btn"%>
+  </div>
+  <%@post.comments.each do |comment| %>
+    <b><%=link_to comment.user.username, comment.user%></b>:<br>
+    <%=comment.body%><br>
+    <%=comment.likes.count%> <b>likes</b>
+    <div class="post-btn">
+      <%if comment.likes.exists?(user_id: current_user.id)%>
+        <%= button_to 'Liked',like_path(id: comment.id, type: "Comment", like_id: comment.likes.find_by_user_id(current_user.id)) , method: :delete, class: "btn btn-danger ", remote: true%>
+      <%else%>
+        <%= button_to 'Like',likes_path(id: comment.id, type: "Comment") , method: :post, class: "btn btn-outline-danger ", remote: true%>
+      <%end%>
+      <%if comment.user == current_user%>
+        <div class="del-upd-btn">
+          <%= button_to 'Delete', comment, method: :delete, class: "btn btn-danger "%>
+          <%= button_to 'Update',edit_comment_path(comment.id) , method: :get, class: "btn btn-warning "%>
+        </div>
+      <%end%>
+      <%if @post.user == current_user && comment.user != current_user%>
+        <%= button_to 'Delete', comment, method: :delete, class: "btn btn-danger "%>
+      <%end%>
+    </div>
+    <hr>
+  <% end %>
+</div>
