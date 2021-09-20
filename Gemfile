@@ -34,8 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.8'
 
 # cloudinary for file upload
-gem 'activestorage-cloudinary-service'
-gem 'cloudinary', require: false
+gem 'cloudinary'
 
 gem 'pundit'
 

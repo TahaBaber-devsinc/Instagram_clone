@@ -1,5 +1,5 @@
 // external js: flickity.pkgd.js
-
+console.log("ajax");
 var $carousel = $(".carousel").flickity({
   imagesLoaded: true,
   percentPosition: false,

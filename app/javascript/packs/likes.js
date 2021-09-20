@@ -8,7 +8,7 @@ $(function () {
       url: "",
       method: "GET",
     }).done(function (response) {
-      console.log(response);
+      console.log(Hello);
       e.preventDefault();
     });
   });

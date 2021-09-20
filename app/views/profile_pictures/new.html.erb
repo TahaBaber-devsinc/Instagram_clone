@@ -6,7 +6,7 @@
     <br>
     <%= form_with(model: @user , url: user_profile_picture_path(@user.id)) do |f| %>
       <div class="field input-group">
-        <%= f.file_field :image, class: "form-control"%>
+        <%= f.file_field :image, class: "form-control" , direct_upload: true%>
       </div>
       <div class="actions">
         <%= f.submit "Update Picture" , class: "btn btn-primary full-width"%>

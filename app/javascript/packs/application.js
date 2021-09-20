@@ -13,3 +13,17 @@ Turbolinks.start();
 ActiveStorage.start();
 
 window.Flickity = require("flickity");
+
+import { $ } from "@rails/ujs";
+
+$(function () {
+  $(".post-btn").on("click", function (e, data, status, xhr) {
+    $.ajax({
+      url: "",
+      method: "GET",
+      success: function (result) {
+        alert("hi")
+      }
+    })
+  });
+});

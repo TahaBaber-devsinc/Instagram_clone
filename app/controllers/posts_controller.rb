@@ -2,6 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :image_count, only: :create
   def new
     @post = Post.new
   end
@@ -52,5 +53,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body, images: [])
+  end
+
+  def image_count
+    redirect_to new_post_path, flash: { notice: 'Images cannot be more than 10' } if post_params[:images].length > 10
   end
 end
