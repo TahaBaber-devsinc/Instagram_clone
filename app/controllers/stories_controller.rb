@@ -7,14 +7,15 @@ class StoriesController < ApplicationController
     if @story.save
       StoryJob.set(wait_until: @story.expiry).perform_later(@story)
     else
-      flash[:notice] = 'Can not add the story'
+      flash[:notice] =
+        'Can not add the story'
     end
-
     redirect_to user_stories_path
   end
 
   def destroy
-    @story = current_user.stories.find(params[:id])
+    @story = Story.find(params[:id])
+    authorize @story
     flash[:notice] = 'Story not found' unless @story.destroy
     redirect_to user_stories_path
   end
@@ -26,6 +27,8 @@ class StoriesController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @stories = @user.stories
+    @story = @stories.first || @user.stories.new
+    authorize @story
   end
 
   private

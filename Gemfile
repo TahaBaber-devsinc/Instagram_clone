@@ -43,6 +43,10 @@ gem 'sidekiq'
 
 gem 'redis', '~> 4.4'
 
+gem 'pg_search'
+
+gem 'pundit'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite

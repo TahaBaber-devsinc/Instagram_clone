@@ -19,29 +19,29 @@
       <h3><%= @user.username%></h3>
       <div class="count-info-flex">
         <span class="count-info"><b><%=@user.posts.count%></b> posts</span>
-        <span class="count-info"><b> <%=@user.followers.count%></b> <%= link_to "followers", followship_followers_path(id: params[:id])%></span>
-        <span class="count-info"><b><%=@user.followees.count%></b> <%= link_to "following" , followship_followees_path(id: params[:id])%></span>
+        <span class="count-info"><b> <%=@user.followers.count%></b> <%= link_to "followers", followers_followship_index_path(id: @user.id)%></span>
+        <span class="count-info"><b><%=@user.followees.count%></b> <%= link_to "following" , followees_followship_index_path(id: @user.id)%></span>
       </div>
       <h6><b><%= @user.email%></b></h6>
     </div>
-    <%if current_user.id != params[:id].to_i%>
-      <%unless current_user.followships.exists?(following_id: params[:id])%>
+    <%if current_user != @user %>
+      <%unless current_user.followships.exists?(following_id: @user.id)%>
         <%if @user.account_type == 'Public'%>
-          <%= button_to 'Follow', followship_create_path(following_id: @user), method: :post , class: "btn btn-outline-dark follow-btn"%>
+          <%= button_to 'Follow', followship_index_path(following_id: @user), method: :post , class: "btn btn-outline-dark follow-btn"%>
         <%elsif !current_user.requests.exists?(followee_id: @user.id)%>
           <%= button_to 'Request', requests_path(id: @user.id), method: :post , class: "btn btn-outline-dark follow-btn"%>
         <%else%>
           <%= button_to 'Cancel Request', request_path(id: @user.id), method: :delete , class: "btn btn-outline-dark follow-btn"%>
         <%end%>
       <%else%>
-        <%= button_to 'Unfollow', followship_destroy_path(following_id: @user), method: :delete , class: "btn btn-outline-secondary"%>
+        <%= button_to 'Unfollow', followship_path(following_id: @user), method: :delete , class: "btn btn-outline-secondary"%>
       <%end%>
     <%else%>
       <div class="d-flex flex-column">
         <%if current_user.account_type == 'Public'%>
-          <%= button_to 'Private',  user_path, method: :put , class: "btn btn-outline-secondary"%>
+          <%= button_to 'Private',  user_path(current_user), method: :put , class: "btn btn-outline-secondary"%>
         <%elsif current_user.account_type == 'Private'%>
-          <%= button_to 'Public',  user_path, method: :put , class: "btn btn-outline-secondary"%>
+          <%= button_to 'Public',  user_path(current_user), method: :put , class: "btn btn-outline-secondary"%>
         <%end%>
         <%= button_to 'Add Story',  new_user_story_path(user_id: @user.id), method: :get , class: "btn btn-outline-dark"%>
         <%= button_to 'View Story',  user_stories_path(user_id: @user.id), method: :get , class: "btn btn-outline-dark"%>
@@ -57,7 +57,7 @@
       <div class="user-post-heading">
         <h2 class="text-center">Posts</h2>
         <div class="add-post-btn">
-          <%if current_user.id == params[:id].to_i%>
+          <%if current_user == @user%>
             <%= button_to 'Add Post', new_post_path, method: :get, class: "btn btn-outline-dark "%>
           <%end%>
         </div>

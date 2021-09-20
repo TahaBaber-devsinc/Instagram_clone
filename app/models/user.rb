@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include PgSearch::Model
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   enum account_type: {
@@ -36,4 +37,8 @@ class User < ApplicationRecord
   has_many :requests, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy
+
+  pg_search_scope :search, against: %i[username email], using: {
+    tsearch: { prefix: true }
+  }
 end

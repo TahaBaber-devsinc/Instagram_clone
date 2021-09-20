@@ -2,20 +2,13 @@
 
 class ProfilePicturesController < ApplicationController
   def new
-    @user = User.find(params[:user_id])
+    @user = current_user
   end
-
-  def show; end
-
-  def edit; end
 
   def update
-    @user = User.find(params[:user_id])
-    @user.image.attach(picture_params[:image])
+    current_user.image.attach(picture_params[:image])
     redirect_to current_user
   end
-
-  def destroy; end
 
   private
 
