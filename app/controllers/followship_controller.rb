@@ -14,6 +14,7 @@ class FollowshipController < ApplicationController
     redirect_to user_path(params[:following_id])
   end
 
+  # follow rest practices
   def followers
     @followers = User.find(params[:id]).followers
   end

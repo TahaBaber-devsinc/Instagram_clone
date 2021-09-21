@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class CommentLikesController < ApplicationController
-  before_action :initialize_var
+  before_action :initialize_comment
   before_action :already_exist, only: :create
   before_action :authenticate_user!
+
   def create
     @like = @comment.likes.new(user_id: current_user.id)
     flash[:notice] = 'Could not like the comment' unless @like.save
@@ -11,8 +12,8 @@ class CommentLikesController < ApplicationController
   end
 
   def destroy
-    @like = @comment.likes.find(params[:like_id])
-    flash[:notice] = 'Could not unlike the comment' unless @like.destroy
+    like = @comment.likes.find(params[:like_id])
+    flash[:notice] = 'Could not unlike the comment' unless like.destroy
     redirect_to @comment.post
   end
 end
@@ -26,6 +27,6 @@ def already_exist
   redirect_to @comment.post
 end
 
-def initialize_var
+def initialize_comment
   @comment = Comment.find_by_id(params[:id])
 end

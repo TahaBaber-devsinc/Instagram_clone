@@ -13,6 +13,7 @@ class PostsController < ApplicationController
       redirect_to current_user
     else
       redirect_to new_post_path
+      # full_messages
       @post.errors.messages.each do |_key, value|
         flash[:notice] = value.first
       end
