@@ -7,23 +7,10 @@ import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
-
+import "jquery";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
 window.Flickity = require("flickity");
 
-import { $ } from "@rails/ujs";
-
-$(function () {
-  $(".post-btn").on("click", function (e, data, status, xhr) {
-    $.ajax({
-      url: "",
-      method: "GET",
-      success: function (result) {
-        alert("hi")
-      }
-    })
-  });
-});

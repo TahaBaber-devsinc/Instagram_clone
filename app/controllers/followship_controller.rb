@@ -21,5 +21,4 @@ class FollowshipController < ApplicationController
   def followees
     @followees = User.find(params[:id]).followees
   end
-
 end
