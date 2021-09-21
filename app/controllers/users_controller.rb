@@ -1,28 +1,18 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[show index]
-  before_action :require_same_id, only: %i[edit update]
+  before_action :authenticate_user!
   def index
-    redirect_to current_user
+    @users = User.search(params[:search])
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_id(params[:id]) || current_user
     @posts = @user.posts
   end
 
   def update
     current_user.account_type == 'Public' ? current_user.update!(account_type: 'Private') : current_user.update!(account_type: 'Public')
     redirect_to current_user
-  end
-
-  private
-
-  def require_same_id
-    return if current_user.id == params[:id].to_i
-
-    flash[:error] = 'You cannot access this id'
-    redirect_to root_path
   end
 end

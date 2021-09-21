@@ -3,15 +3,17 @@
   <!-- Flickity HTML init -->
   <div class="carousel " data-flickity='{ "freeScroll": true }'>
     <%@stories.each do |story|%>
-      <div class="carousel-cell d-flex ">
-        <%=image_tag story.image, class: "post-pic "%>
-        <div class="story">
-          <%= button_to 'Delete', user_story_path(id: story.id), method: :delete, class: "btn btn-danger "%>
+      <%if story.image.attached?%>
+        <div class="carousel-cell d-flex ">
+          <%=image_tag story.image, class: "post-pic "%>
+          <div class="story">
+            <%= button_to 'Delete', user_story_path(id: story.id), method: :delete, class: "btn btn-danger "%>
+          </div>
         </div>
-      </div>
+      <%end%>
     <%end%>
   </div>
 </div>
-<%@stories.each do |story|%>
-  <%=story.expiry%> <br>
-<%end%>
+
+<%=javascript_pack_tag 'flickity'%>
+

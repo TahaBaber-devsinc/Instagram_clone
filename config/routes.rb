@@ -9,15 +9,18 @@ Rails.application.routes.draw do
       delete :reject
     end
   end
-  resources :likes
+  resources :post_likes
+  resources :comment_likes
   resources :posts do
     resources :comments, shallow: true
   end
+  resources :followship do
+    collection do
+      get :followers
+      get :followees
+    end
+  end
 
-  post 'followship/create'
-  delete 'followship/destroy'
-  get 'followship/followers'
-  get 'followship/followees'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users do
@@ -25,5 +28,5 @@ Rails.application.routes.draw do
     resources :stories
   end
 
-  root to: 'users#index'
+  root to: 'users#show'
 end

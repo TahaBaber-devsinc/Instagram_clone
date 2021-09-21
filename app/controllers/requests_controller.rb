@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RequestsController < ApplicationController
   def index
     @requests = Request.where(followee_id: current_user.id).includes(:user)
@@ -26,6 +28,7 @@ class RequestsController < ApplicationController
 
   def reject
     @request = Request.find(params[:id])
+    authorize @request
     @request.destroy
     redirect_to current_user
   end

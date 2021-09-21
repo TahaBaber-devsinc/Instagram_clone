@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def new
     @post = Post.find params[:post_id]
-    @comment = Comment.new
+    @comment = @post.comments.new
+    authorize @comment
   end
 
   def create
@@ -12,6 +13,7 @@ class CommentsController < ApplicationController
     param = comment_params
     param [:user_id] = current_user.id
     @comment = @post.comments.new(param)
+    authorize @comment
     redirect_to @post and return if @comment.save
 
     flash[:notice] = 'Comment could not be empty'
@@ -20,20 +22,19 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    authorize @comment
     flash[:notice] = 'Cannot destroy' unless @comment.destroy
     redirect_to @comment.post
   end
 
   def edit
-    @comment = current_user.comments.find_by_id(params[:id])
-    return unless @comment.nil?
-
-    flash[:notice] = 'Cannot Update this Comment'
-    redirect_to current_user
+    @comment = Comment.find(params[:id])
+    authorize @comment
   end
 
   def update
-    @comment = current_user.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
+    authorize @comment
     if @comment.update(comment_params)
       redirect_to @comment.post
     else

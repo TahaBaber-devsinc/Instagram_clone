@@ -1,5 +1,6 @@
 // external js: flickity.pkgd.js
-
+import { $ } from "@rails/ujs";
+console.log("ajax");
 var $carousel = $(".carousel").flickity({
   imagesLoaded: true,
   percentPosition: false,
