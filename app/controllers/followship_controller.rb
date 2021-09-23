@@ -13,13 +13,4 @@ class FollowshipController < ApplicationController
     @followship.destroy
     redirect_to user_path(params[:following_id])
   end
-
-  # follow rest practices
-  def followers
-    @followers = User.find(params[:id]).followers
-  end
-
-  def followees
-    @followees = User.find(params[:id]).followees
-  end
 end

@@ -1,7 +1,27 @@
-<%=javascript_pack_tag 'likes'%>
+<style type="text/css">
+  <%if @post.likes.exists?(user_id: current_user.id)%>
+    #like-post-btn{
+      display: none;
+    }
+  <%else%>
+    #dislike-post-btn{
+      display: none;
+    }
+  <%end%>
+  <%@post.comments.each do |comment|%>
+    <%if comment.likes.exists?(user_id: current_user.id)%>
+      #like-comment-btn-<%=comment.id%>{
+        display: none;
+      }
+    <%else%>
+      #dislike-comment-btn-<%=comment.id%>{
+        display: none;
+      }
+    <%end%>
+  <%end%>
+</style>
 <div class= "post-body">
   <h1 class="text-center logo">Post</h1>
-  <!-- Flickity HTML init -->
   <div class="carousel " data-flickity='{ "freeScroll": true }'>
     <%@post.images.each do |image|%>
       <%= image_tag(image, class: "post-pic border carousel-cell")%>
@@ -10,20 +30,13 @@
   <h3><%=@post.user.username%></h3>
   <%=@post.body%>
   <br>
-  <%=@post.likes.count%>
+  <span class= "like-count">
+    <%=@post.likes.count%>
+  </span>
   <b>likes</b>
   <div class= "post-btn">
-    <%if @post.likes.exists?(user_id: current_user.id)%>
-      <%= button_to 'Liked',post_like_path(like_id: @post.likes.find_by(user_id: current_user.id), id: @post.id), method: :delete, class: "btn btn-danger post-like ", remote: true, local: false%>
-    <%else%>
-      <%= button_to 'Like',post_likes_path(id: @post.id) , method: :post, class: "btn btn-outline-danger post-like", remote: true%>
-    <%end%>
-    <%if @post.user_id == current_user.id%>
-      <div class= "del-upd-btn">
-        <%= button_to 'Delete', @post, method: :delete, class: "btn btn-danger "%>
-        <%= button_to 'Update',edit_post_path , method: :get, class: "btn btn-warning "%>
-      </div>
-    <%end%>
+    <%= post_like_btn%>
+    <%= user_post_btn%>
   </div>
   <hr>
   <div class="add-comment-btn">
@@ -33,25 +46,13 @@
   <%@post.comments.each do |comment| %>
     <b><%=link_to comment.user.username, comment.user%></b>:<br>
     <%=comment.body%><br>
-    <%=comment.likes.count%> <b>likes</b>
+    <span id="comment-like-count-<%=comment.id%>"><%=comment.likes.count%></span> <b>likes</b>
     <div class="post-btn">
-      <%if comment.likes.exists?(user_id: current_user.id)%>
-        <%= button_to 'Liked',comment_like_path(id: comment.id, like_id: comment.likes.find_by_user_id(current_user.id)) , method: :delete, class: "btn btn-danger ", remote: true%>
-      <%else%>
-        <%= button_to 'Like',comment_likes_path(id: comment.id) , method: :post, class: "btn btn-outline-danger ", remote: true%>
-      <%end%>
-      <%if comment.user == current_user%>
-        <div class="del-upd-btn">
-          <%= button_to 'Delete', comment_path(id: comment.id), method: :delete, class: "btn btn-danger "%>
-          <%= button_to 'Update', edit_comment_path(comment.id) , method: :get, class: "btn btn-warning "%>
-        </div>
-      <%end%>
-      <%if @post.user == current_user && comment.user != current_user%>
-        <%= button_to 'Delete', comment, method: :delete, class: "btn btn-danger "%>
-      <%end%>
+      <%= comment_like_btn(comment)%>
+      <%= user_comment_btn(comment)%>
+      <%= user_post_comment_btn(comment)%>
     </div>
     <hr>
   <% end %>
 </div>
 <%=javascript_pack_tag 'flickity'%>
-

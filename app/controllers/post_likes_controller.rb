@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
 class PostLikesController < ApplicationController
-  before_action :initialize_var
+  before_action :initialize_post
   before_action :already_exist, only: :create
   before_action :authenticate_user!
   def create
-    @like = @post.likes.new(user_id: current_user.id)
-    flash[:notice] = 'Could not like the Post' unless @like.save
-    redirect_to @post
+    like = @post.likes.new(user_id: current_user.id)
+    redirect_to @post, flash: {notice: 'Could not like the Post'} unless like.save
   end
 
   def destroy
-    @like = @post.likes.find(params[:like_id])
-    flash[:notice] = 'Could not unlike the comment' unless @like.destroy
-    redirect_to @post
+    like = @post.likes.find_by!(user_id: current_user.id)
+    redirect_to @post, flash: {notice: 'Could not unlike the Post'} unless like.destroy
   end
 end
 
@@ -26,6 +24,6 @@ def already_exist
   redirect_to @post
 end
 
-def initialize_var
-  @post = Post.find_by_id(params[:id])
+def initialize_post
+  @post = Post.find(params[:id])
 end
