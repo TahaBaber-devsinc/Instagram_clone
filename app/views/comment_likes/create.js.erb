@@ -1,0 +1,6 @@
+$(function () {
+  let comment_id = <%=@comment.id%>;
+  $("#dislike-comment-btn-"+comment_id).show();
+  $("#like-comment-btn-"+comment_id).hide();
+  $("#comment-like-count-"+comment_id).text("<%=@comment.likes.count%>");
+});

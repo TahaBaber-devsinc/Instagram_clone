@@ -1,0 +1,5 @@
+$(function () {
+$("#dislike-post-btn").css("display", "block");
+$("#like-post-btn").css("display", "none");
+$(".like-count").text("<%=@post.likes.count%>");
+});

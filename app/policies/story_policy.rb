@@ -8,8 +8,7 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def index?
-    story_user = @record.user
-    @user == story_user || story_user.account_type == 'Public' || story_user.followers.exists?(@user.id)
+    @user == @record || @record.account_type == 'Public' || @record.followers.exists?(@user.id)
   end
 
   def destroy?

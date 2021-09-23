@@ -1,5 +1,8 @@
 <%@requests.each do |request|%>
+<div class="d-flex justify-content-center align-items-center">
   <%=request.user.username%>
-  <%= button_to 'Accept', accept_requests_path(id: request.user) , method: :post , class: "btn btn-outline-dark"%>
-  <%= button_to 'Reject',  reject_request_path(request) , method: :delete , class: "btn btn-outline-dark"%>
+  <%= button_to 'Accept', accept_requests_path(id: request.user) , method: :post , class: "btn btn-outline-dark req-btn"%>
+  <%= button_to 'Reject',  reject_request_path(request) , method: :delete , class: "btn btn-outline-dark req-btn"%>
+  </div>
+  <hr>
 <%end%>

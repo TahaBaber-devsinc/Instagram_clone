@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.account_type == 'Public' ? current_user.update!(account_type: 'Private') : current_user.update!(account_type: 'Public')
+    current_user.update!(account_type: User.account_types[current_user.account_type] ^ 1)
     redirect_to current_user
   end
 end

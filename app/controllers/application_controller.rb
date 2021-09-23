@@ -11,7 +11,13 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  #rescue_from ::Exception, with: :error_occurred
+
   private
+
+  def error_occurred(exception)
+    render html: { error: exception.message }, status: 404
+  end
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'

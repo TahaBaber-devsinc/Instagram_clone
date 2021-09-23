@@ -6,15 +6,13 @@ class CommentLikesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @like = @comment.likes.new(user_id: current_user.id)
-    flash[:notice] = 'Could not like the comment' unless @like.save
-    redirect_to @comment.post
+    like = @comment.likes.new(user_id: current_user.id)
+    redirect_to @comment.post, flash: { notice: 'Could not like the comment' } unless like.save
   end
 
   def destroy
-    like = @comment.likes.find(params[:like_id])
-    flash[:notice] = 'Could not unlike the comment' unless like.destroy
-    redirect_to @comment.post
+    like = @comment.likes.find_by!(user_id: current_user.id)
+    redirect_to @comment.post, flash: { notice: 'Could not unlike the comment' } unless like.destroy
   end
 end
 
@@ -28,5 +26,5 @@ def already_exist
 end
 
 def initialize_comment
-  @comment = Comment.find_by_id(params[:id])
+  @comment = Comment.find(params[:id])
 end
