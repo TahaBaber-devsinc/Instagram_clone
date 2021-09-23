@@ -13,7 +13,7 @@ class CommentPolicy < ApplicationPolicy
 
   def create?
     post_user = @record.post.user
-    post_user == @user || post_user.account_type == 'Public' || post_user.followers.exists?(@user.id)
+    post_user == @user || post_user.Public? || post_user.followers.exists?(@user.id)
   end
 
   def destroy?

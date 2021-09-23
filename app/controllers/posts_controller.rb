@@ -40,9 +40,7 @@ class PostsController < ApplicationController
   end
 
   def error_messages
-    @post.errors.each do |error|
-      flash[:notice] = error.full_message
-    end
+    @post.errors.each { |error| flash[:notice] = error.full_message }
   end
 
   def post_params

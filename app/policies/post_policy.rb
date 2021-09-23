@@ -9,7 +9,7 @@ class PostPolicy < ApplicationPolicy
 
   def show?
     post_user = @record.user
-    @user == post_user || post_user.account_type == 'Public' || post_user.followers.exists?(@user.id)
+    @user == post_user || post_user.Public? || post_user.followers.exists?(@user.id)
   end
 
   def edit?

@@ -14,17 +14,17 @@ class CommentLikesController < ApplicationController
     like = @comment.likes.find_by!(user_id: current_user.id)
     redirect_to @comment.post, flash: { notice: 'Could not unlike the comment' } unless like.destroy
   end
-end
 
-private
+  private
 
-def already_exist
-  return unless @comment.likes.exists?(user_id: current_user.id)
+  def already_exist
+    return unless @comment.likes.exists?(user_id: current_user.id)
 
-  flash[:notice] = 'Already Liked the Comment'
-  redirect_to @comment.post
-end
+    flash[:notice] = 'Already Liked the Comment'
+    redirect_to @comment.post
+  end
 
-def initialize_comment
-  @comment = Comment.find(params[:id])
+  def initialize_comment
+    @comment = Comment.find(params[:id])
+  end
 end

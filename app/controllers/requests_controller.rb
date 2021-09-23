@@ -19,10 +19,8 @@ class RequestsController < ApplicationController
 
   def accept
     user = User.find(params[:id])
-    request = user.requests.find_by_followee_id(current_user.id)
-    request.destroy
-    followship = user.followships.build(following_id: current_user.id)
-    followship.save
+    # FollowshipBuilder
+    RequestAccept.call(user, current_user)
     redirect_to current_user
   end
 
