@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
   def accept
     user = User.find(params[:id])
     # FollowshipBuilder
-    RequestAccept.call(user, current_user)
+    RequestAccept.new(user, current_user).call
     redirect_to current_user
   end
 
