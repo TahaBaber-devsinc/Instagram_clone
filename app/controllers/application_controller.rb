@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  rescue_from ActiveRecord::RecordNotFound, with: :error_occurred
+  #rescue_from ActiveRecord::RecordNotFound, with: :error_occurred
   rescue_from ActiveRecord::RecordInvalid, with: :error_occurred
   # rescue_from ActionController::ParameterMissing, with: :error_occurred
 
