@@ -46,6 +46,8 @@ gem 'pg_search'
 
 gem 'spring'
 
+gem 'active_storage_validations'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite

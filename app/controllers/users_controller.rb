@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = params[:search] == '' ? User.all : User.search(params[:search])
+    @users = params[:search].blank? ? User.all : User.search(params[:search])
   end
 
   def show

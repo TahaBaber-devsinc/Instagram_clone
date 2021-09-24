@@ -7,10 +7,10 @@ class StoriesController < ApplicationController
     story = current_user.stories.new(story_params)
     if story.save
       StoryJob.set(wait_until: story.expiry).perform_later(story)
+      redirect_to user_stories_path
     else
-      flash[:notice] = 'Can not add the story'
+      error_messages(story) and redirect_to new_user_story_path
     end
-    redirect_to user_stories_path
   end
 
   def destroy
@@ -33,6 +33,8 @@ class StoriesController < ApplicationController
   private
 
   def story_params
+    return nil if params[:story].nil?
+
     params.require(:story).permit(:image)
   end
 end

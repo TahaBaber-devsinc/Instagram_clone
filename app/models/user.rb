@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for users
 class User < ApplicationRecord
   include PgSearch::Model
 
@@ -13,21 +14,15 @@ class User < ApplicationRecord
   after_create :send_admin_mail
 
   validates :username, presence: true
-  validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }
+  validates :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp']
 
   has_many :posts, dependent: :destroy
-
   has_many :stories, dependent: :destroy
-
   has_many :comments, dependent: :destroy
-
   has_many :likes, dependent: :destroy
-
   has_many :requests, dependent: :destroy
-
   has_many :followships
   has_many :followees, through: :followships, dependent: :destroy
-
   has_many :inverse_followships, class_name: 'Followship', foreign_key: 'following_id'
   has_many :followers, through: :inverse_followships, source: :user, dependent: :destroy
 

@@ -8,17 +8,15 @@ class ProfilePicturesController < ApplicationController
 
   def update
     current_user.image.attach(picture_params[:image])
-    error_messages if current_user.save
-    redirect_to current_user if current_user.save
+    error_messages(current_user)
+    redirect_to new_user_profile_picture_path
   end
 
   private
 
   def picture_params
-    params.require(:user).permit(:image)
-  end
+    flash[:notice] = "Image can't be blank " and return {} if params[:user].blank?
 
-  def error_messages
-    current_user.errors.each { |error| flash[:notice] = error.full_message }
+    params.require(:user).permit(:image)
   end
 end

@@ -13,15 +13,21 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   rescue_from ActiveRecord::RecordNotFound, with: :error_occurred
+  rescue_from ActiveRecord::RecordInvalid, with: :error_occurred
+  # rescue_from ActionController::ParameterMissing, with: :error_occurred
 
   private
 
-  def error_occurred(exception)
-    render html: { error: exception.message }, status: 404
+  def error_occurred(_exception)
+    render 'public/404.html', status: 404
   end
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to root_path
+  end
+
+  def error_messages(model_obj)
+    model_obj.errors.each { |error| flash[:notice] = error.full_message }
   end
 end

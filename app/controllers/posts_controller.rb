@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     redirect_to current_user and return if @post.save
 
-    error_messages
+    error_messages(@post)
     redirect_to new_post_path
   end
 
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def update
     redirect_to @post and return if @post.update(post_params)
 
-    error_messages
+    error_messages(@post)
     redirect_to edit_post_path
   end
 
@@ -41,10 +41,6 @@ class PostsController < ApplicationController
   def initialize_post
     @post = Post.find(params[:id])
     authorize @post
-  end
-
-  def error_messages
-    @post.errors.each { |error| flash[:notice] = error.full_message }
   end
 
   def post_params

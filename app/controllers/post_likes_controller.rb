@@ -6,6 +6,7 @@ class PostLikesController < ApplicationController
   before_action :already_exist, only: :create
   before_action :authenticate_user!
 
+  # Create authorization
   def create
     like = @post.likes.new(user_id: current_user.id)
     redirect_to @post, flash: { notice: 'Could not like the Post' } unless like.save
