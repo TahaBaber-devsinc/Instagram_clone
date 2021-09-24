@@ -10,6 +10,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  after_create :send_admin_mail
+
   validates :username, presence: true
   validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }
 
@@ -34,4 +36,10 @@ class User < ApplicationRecord
   pg_search_scope :search, against: %i[username email], using: {
     tsearch: { prefix: true }
   }
+
+  private
+
+  def send_admin_mail
+    UserMailer.sign_up(self).deliver
+  end
 end

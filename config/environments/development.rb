@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -81,4 +81,16 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
   # Use Cloudinary.
   config.active_storage.service = :cloudinary
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'devsinc.com',
+    user_name: 'taha.babar@devsinc.com',
+    password: 'taha12345',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end
