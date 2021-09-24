@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# class for users profiles pictures
+
 class ProfilePicturesController < ApplicationController
   def new
     @user = current_user

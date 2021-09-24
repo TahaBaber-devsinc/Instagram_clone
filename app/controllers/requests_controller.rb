@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class that handles follow requests
 class RequestsController < ApplicationController
   def index
     @requests = Request.where(followee_id: current_user.id).includes(:user)
