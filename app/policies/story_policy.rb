@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# main authorization class for stories
 class StoryPolicy < ApplicationPolicy
+  # scope for stories
   class Scope < Scope
     def resolve
       scope.all

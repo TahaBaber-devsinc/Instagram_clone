@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# main authorization class for comments
 class CommentPolicy < ApplicationPolicy
+  # scope for comment authorization
   class Scope < Scope
     def resolve
       scope.all

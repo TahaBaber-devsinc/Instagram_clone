@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# model class for posts
 class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :images, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }

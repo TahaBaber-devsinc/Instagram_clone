@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# main authorization class for post
 class PostPolicy < ApplicationPolicy
+  # scope for posts
   class Scope < Scope
     def resolve
       scope.all

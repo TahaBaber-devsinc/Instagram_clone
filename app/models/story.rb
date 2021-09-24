@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# model class for stories
 class Story < ApplicationRecord
   validates :user_id, presence: true
   validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }

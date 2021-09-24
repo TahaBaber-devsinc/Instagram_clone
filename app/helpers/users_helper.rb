@@ -13,24 +13,34 @@ module UsersHelper
     end
   end
 
+  def user_profile_pic_helper
+    if @user.image.attached?
+      link_to image_tag(@user.image, width: '150', height: '150', class: 'profile-pic border border-3'),
+              new_user_profile_picture_path(current_user)
+    else
+      link_to image_tag('https://www.gravatar.com/avatar/8063e2e1dcc866a5ffaddafdc2fd49f4?size=192&d=mm',
+                        width: '150', height: '150', class: 'profile-pic border border-3'),
+              new_user_profile_picture_path(current_user)
+    end
+  end
+
+  def image_check
+    if @user.image.attached?
+      link_to image_tag(@user.image, width: '150', height: '150', class: 'profile-pic border border-3'),
+              user_stories_path(@user)
+    else
+      link_to image_tag('https://www.gravatar.com/avatar/8063e2e1dcc866a5ffaddafdc2fd49f4?size=192&d=mm',
+                        width: '150', height: '150', class: 'profile-pic border border-3'),
+              user_stories_path(@user)
+    end
+  end
+
   def user_profile_pic
     content_tag(:div, class: 'profile-pic-div') do
       if @user == current_user
-        if @user.image.attached?
-          link_to image_tag(@user.image, width: '150', height: '150', class: 'profile-pic border border-3'),
-                  new_user_profile_picture_path(current_user)
-        else
-          link_to image_tag('https://www.gravatar.com/avatar/8063e2e1dcc866a5ffaddafdc2fd49f4?size=192&d=mm',
-                            width: '150', height: '150', class: 'profile-pic border border-3'),
-                  new_user_profile_picture_path(current_user)
-        end
-      elsif @user.image.attached?
-        link_to image_tag(@user.image, width: '150', height: '150', class: 'profile-pic border border-3'),
-                user_stories_path(@user)
+        user_profile_pic_helper
       else
-        link_to image_tag('https://www.gravatar.com/avatar/8063e2e1dcc866a5ffaddafdc2fd49f4?size=192&d=mm',
-                          width: '150', height: '150', class: 'profile-pic border border-3'),
-                user_stories_path(@user)
+        image_check
       end
     end
   end

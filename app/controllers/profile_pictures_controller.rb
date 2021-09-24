@@ -8,8 +8,8 @@ class ProfilePicturesController < ApplicationController
 
   def update
     current_user.image.attach(picture_params[:image])
-    error_messages if current_user.image.persisted?
-    redirect_to current_user if current_user.image.persisted?
+    error_messages if current_user.save
+    redirect_to current_user if current_user.save
   end
 
   private

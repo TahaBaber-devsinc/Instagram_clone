@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# service class for accepting requests
 class RequestAccept
   def initialize(user, current_user)
     @user = user

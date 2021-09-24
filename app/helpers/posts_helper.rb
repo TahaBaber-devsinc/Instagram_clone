@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#this is a helper for views of post class
+# this is a helper for views of post class
 module PostsHelper
   def user_post_btn
     return unless @post.user_id == current_user.id
