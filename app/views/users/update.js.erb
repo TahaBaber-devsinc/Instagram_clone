@@ -1,0 +1,13 @@
+$(function () {
+  if (<%= current_user.Public? %>) {
+    $("#public-btn").hide();
+    $("#private-btn").show();
+    $("#request-btn").hide();
+  }
+  else {
+    $("#public-btn").show();
+    $("#private-btn").hide();
+    $("#request-btn").show();
+  }
+
+});

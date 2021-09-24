@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BlobValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, values)
     return unless values.attached?

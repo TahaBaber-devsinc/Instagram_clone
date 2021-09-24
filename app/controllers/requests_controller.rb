@@ -7,19 +7,16 @@ class RequestsController < ApplicationController
 
   def create
     request = current_user.requests.new(followee_id: params[:id])
-    flash[:notice] = 'Cannot request' unless request.save
-    redirect_to user_path(params[:id])
+    redirect_to user_path(params[:id]), flash: { notice: 'Cannot request' } unless request.save
   end
 
   def destroy
     @request = current_user.requests.find_by_followee_id(params[:id])
-    flash[:notice] = 'Cannot cancel' unless @request.destroy
-    redirect_to user_path(params[:id])
+    redirect_to user_path(params[:id]), flash: { notice: 'Cannot cancel' } unless @request.destroy
   end
 
   def accept
     user = User.find(params[:id])
-    # FollowshipBuilder
     RequestAccept.new(user, current_user).call
     redirect_to current_user
   end

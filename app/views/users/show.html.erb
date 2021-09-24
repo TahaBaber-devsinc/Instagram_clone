@@ -11,16 +11,12 @@
       <h6><b><%= @user.email%></b></h6>
     </div>
     <% if current_user != @user %>
-      <% unless current_user.followships.exists?(following_id: @user.id) %>
         <%= public_user_btn %>
-      <% else %>
-        <%= button_to('Unfollow', followship_path(following_id: @user), method: :delete , class: "btn btn-outline-secondary")%>
-      <%end%>
+        <%= private_user_btn%>
     <%else%>
       <div class="d-flex flex-column">
-        <%= account_btn%>
-        <%= story_btn%>
-        <%= private_btn%>
+        <%= account_btn %>
+        <%= story_btn %>
       </div>
     <%end%>
   </div>
@@ -35,6 +31,13 @@
           <% end %>
         </div>
       </div>
+      <% if @posts.count == 0 %>
+        <br><hr>
+        <p class="text-center text-secondary">No posts Yet</p>
+
+      <% end %>
+
+
       <div class="posts">
         <%@posts.each do |post|%>
           <%if post.images.count>0%>

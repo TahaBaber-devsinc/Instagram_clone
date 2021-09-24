@@ -2,6 +2,7 @@
 
 class Story < ApplicationRecord
   validates :user_id, presence: true
+  validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }
 
   belongs_to :user
 

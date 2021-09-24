@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   def create
     story = current_user.stories.new(story_params)
     if story.save
-      StoryJob.set(wait: 5.seconds).perform_later(story)
+      StoryJob.set(wait_until: story.expiry).perform_later(story)
     else
       flash[:notice] = 'Can not add the story'
     end

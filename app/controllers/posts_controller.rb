@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class for posts controller
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :initialize_post, only: %i[show action update destroy]
@@ -18,7 +19,10 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    @post = Post.find(params[:id])
+    authorize @post
+  end
 
   def update
     redirect_to @post and return if @post.update(post_params)

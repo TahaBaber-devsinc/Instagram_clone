@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# main controller class
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  #rescue_from ::Exception, with: :error_occurred
+  rescue_from ActiveRecord::RecordNotFound, with: :error_occurred
 
   private
 

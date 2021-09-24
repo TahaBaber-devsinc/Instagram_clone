@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class for comments on posts
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :initialize_post, only: %i[new create]

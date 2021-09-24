@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RequestAccept
   def initialize(user, current_user)
     @user = user

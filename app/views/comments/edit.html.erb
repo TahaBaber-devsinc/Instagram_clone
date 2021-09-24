@@ -1,18 +1,1 @@
-<div class="reg-form">
-  <div class="reg-content border">
-    <h2 class="logo">Edit Comment</h2>
-    <div class= "sign-up-text">    Edit Comment to save changes</div>
-    <hr>
-    <br>
-    <%= form_with model: @comment do |f| %>
-      <div class="field">
-        <%= f.text_field :body,  placeholder: @body, class: "form-control"%>
-      </div>
-      <div class="actions">
-        <%= f.submit "Edit Comment" , class: "btn btn-primary full-width"%>
-      </div>
-    <% end %>
-    <br>
-    <hr>
-  </div>
-</div>
+<%= render partial: "form", locals: {type: "Edit", model_obj: [@post, @comment]} %>

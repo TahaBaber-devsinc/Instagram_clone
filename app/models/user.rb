@@ -11,6 +11,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true
+  validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'] }
 
   has_many :posts, dependent: :destroy
 

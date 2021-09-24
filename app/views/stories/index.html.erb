@@ -1,6 +1,8 @@
 <div class= "post-body">
   <h1 class="text-center logo">Stories</h1>
-  <!-- Flickity HTML init -->
+  <%if @stories.count == 0%>
+    <p class="text-center text-secondary"> No Story found </p>
+    <%else%>
   <div class="carousel " data-flickity='{ "freeScroll": true }'>
     <%@stories.each do |story|%>
       <%if story.image.attached?%>
@@ -11,6 +13,7 @@
           </div>
         </div>
       <%end%>
+    <%end%>
     <%end%>
   </div>
 </div>

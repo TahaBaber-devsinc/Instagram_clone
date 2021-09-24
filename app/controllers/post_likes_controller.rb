@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class for likes on posts
 class PostLikesController < ApplicationController
   before_action :initialize_post
   before_action :already_exist, only: :create
