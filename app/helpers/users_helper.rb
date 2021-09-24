@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# this is a helper for views of user class
 module UsersHelper
   def profile_pic(user)
     content_tag(:div, class: 'profile-pic-div') do
