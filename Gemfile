@@ -46,6 +46,10 @@ gem 'pg_search'
 
 gem 'spring'
 
+gem 'active_storage_validations'
+
+gem 'figaro'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
@@ -66,7 +70,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  #gem 'spring'
+  # gem 'spring'
 end
 
 group :test do

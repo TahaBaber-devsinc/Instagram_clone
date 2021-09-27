@@ -2,46 +2,49 @@
   <div class ="user-page">
     <%= user_profile_pic%>
     <div class = "profile-info">
-      <h3><%= @user.username%></h3>
+      <h3><%= @user.username %></h3>
       <div class="count-info-flex">
-        <span class="count-info"><b><%=@user.posts.count%></b> posts</span>
-        <span class="count-info"><b> <%=@user.followers.count%></b> followers</span>
-        <span class="count-info"><b><%=@user.followees.count%></b> following</span>
+        <span class="count-info"><b><%= @user.posts.count %></b> posts</span>
+        <span class="count-info" id="follower-count"><b> <%= @user.followers.count %></b> followers</span>
+        <span class="count-info"><b><%= @user.followees.count %></b> following</span>
       </div>
       <h6><b><%= @user.email%></b></h6>
     </div>
-    <%if current_user != @user %>
-      <%unless current_user.followships.exists?(following_id: @user.id)%>
-        <%= public_user_btn%>
-      <%else%>
-        <%= button_to 'Unfollow', followship_path(following_id: @user), method: :delete , class: "btn btn-outline-secondary"%>
-      <%end%>
+    <% if current_user != @user %>
+        <%= public_user_btn %>
+        <%= private_user_btn%>
     <%else%>
       <div class="d-flex flex-column">
-        <%= account_btn%>
-        <%= story_btn%>
-        <%= private_btn%>
+        <%= account_btn %>
+        <%= story_btn %>
       </div>
     <%end%>
   </div>
   <hr>
-  <%unless @user != current_user && !@user.followers.exists?(current_user.id) && @user.account_type == 'Private'%>
+  <% unless @user != current_user && !@user.followers.exists?(current_user.id) && @user.account_type == 'Private' %>
     <div class="user-posts">
       <div class="user-post-heading">
         <h2 class="text-center">Posts</h2>
         <div class="add-post-btn">
-          <%if current_user == @user%>
+          <%  if current_user == @user%>
             <%= button_to 'Add Post', new_post_path, method: :get, class: "btn btn-outline-dark "%>
-          <%end%>
+          <% end %>
         </div>
       </div>
+      <% if @posts.count == 0 %>
+        <br><hr>
+        <p class="text-center text-secondary">No posts Yet</p>
+
+      <% end %>
+
+
       <div class="posts">
-        <%@posts.each do |post|%>
-          <%if post.images.count>0%>
-            <%= link_to image_tag(post.images.first, width: "200", height: "200", class: "post-pic border"), post%>
-          <%end%>
-        <%end%>
+        <% @posts.each do |post| %>
+          <% if post.images.count > 0 %>
+            <%= link_to image_tag(post.images.first, width: "200", height: "200", class: "post-pic border"), post %>
+          <% end %>
+        <% end %>
       </div>
     </div>
-  <%end%>
+  <% end %>
 </div>

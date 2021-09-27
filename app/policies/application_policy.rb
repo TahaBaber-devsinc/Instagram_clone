@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# main pundit policy class
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -36,6 +37,7 @@ class ApplicationPolicy
     false
   end
 
+  # scope for main pundit class
   class Scope
     def initialize(user, scope)
       @user = user

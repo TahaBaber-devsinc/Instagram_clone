@@ -35,7 +35,6 @@ body {
   color: white;
 }
 
-
 .post-body {
   padding: 1% 10%;
 }
@@ -45,7 +44,7 @@ body {
   justify-content: space-between;
 }
 .del-upd-btn {
-  flex-basis: 12%;
+  flex-basis: 6.8vw;
   display: flex;
   justify-content: space-between;
 }
@@ -53,8 +52,16 @@ body {
 .add-comment-btn {
   display: flex;
   justify-content: center;
-  form, h2 {
+  form,
+  h2 {
     margin-left: auto;
   }
+}
 
+.none {
+  display: none;
+}
+
+.block {
+  display: block;
 }

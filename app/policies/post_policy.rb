@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# main authorization class for post
 class PostPolicy < ApplicationPolicy
+  # scope for posts
   class Scope < Scope
     def resolve
       scope.all
@@ -9,7 +11,7 @@ class PostPolicy < ApplicationPolicy
 
   def show?
     post_user = @record.user
-    @user == post_user || post_user.account_type == 'Public' || post_user.followers.exists?(@user.id)
+    @user == post_user || post_user.Public? || post_user.followers.exists?(@user.id)
   end
 
   def edit?
@@ -22,5 +24,13 @@ class PostPolicy < ApplicationPolicy
 
   def destroy?
     @user == @record.user
+  end
+
+  def new?
+    !@user.nil?
+  end
+
+  def create?
+    @record.user == @user
   end
 end

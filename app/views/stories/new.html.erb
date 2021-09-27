@@ -6,7 +6,7 @@
     <br>
     <%= form_with model: @story, url: user_stories_path  do |f| %>
       <div class="field input-group">
-        <%= f.file_field :image, class: "form-control"%>
+        <%= f.file_field :image, class: "form-control", accept: "image/*"%>
       </div>
       <div class="actions">
         <%= f.submit "Add Story" , class: "btn btn-primary full-width", direct_upload: true%>

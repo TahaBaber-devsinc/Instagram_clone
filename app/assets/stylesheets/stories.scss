@@ -1,8 +1,12 @@
 // Place all the styles related to the stories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.story{
+.story {
   position: absolute;
   right: 0%;
   bottom: 0%;
+}
+
+.story-pic {
+  max-width: 87%;
 }

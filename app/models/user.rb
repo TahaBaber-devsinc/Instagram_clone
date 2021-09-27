@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for users
 class User < ApplicationRecord
   include PgSearch::Model
 
@@ -10,21 +11,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  after_create :send_admin_mail
+
   validates :username, presence: true
+  validates :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp']
 
   has_many :posts, dependent: :destroy
-
   has_many :stories, dependent: :destroy
-
   has_many :comments, dependent: :destroy
-
   has_many :likes, dependent: :destroy
-
   has_many :requests, dependent: :destroy
-
   has_many :followships
   has_many :followees, through: :followships, dependent: :destroy
-
   has_many :inverse_followships, class_name: 'Followship', foreign_key: 'following_id'
   has_many :followers, through: :inverse_followships, source: :user, dependent: :destroy
 
@@ -33,4 +31,10 @@ class User < ApplicationRecord
   pg_search_scope :search, against: %i[username email], using: {
     tsearch: { prefix: true }
   }
+
+  private
+
+  def send_admin_mail
+    UserMailer.sign_up(self).deliver
+  end
 end

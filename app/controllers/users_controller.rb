@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+# class for users
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authorize_user
+
   def index
-    @users = User.search(params[:search])
+    @users = params[:search].blank? ? User.all : User.search(params[:search])
   end
 
   def show
@@ -12,7 +14,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update!(account_type: User.account_types[current_user.account_type] ^ 1)
-    redirect_to current_user
+    Request.where(followee_id: current_user.id).destroy_all
+    current_user.update(account_type: User.account_types[current_user.account_type] ^ 1)
+  end
+
+  private
+
+  def authorize_user
+    authorize(nil, policy_class: UserPolicy)
   end
 end

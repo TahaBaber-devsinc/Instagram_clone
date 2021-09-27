@@ -1,25 +1,3 @@
-<style type="text/css">
-  <%if @post.likes.exists?(user_id: current_user.id)%>
-    #like-post-btn{
-      display: none;
-    }
-  <%else%>
-    #dislike-post-btn{
-      display: none;
-    }
-  <%end%>
-  <%@post.comments.each do |comment|%>
-    <%if comment.likes.exists?(user_id: current_user.id)%>
-      #like-comment-btn-<%=comment.id%>{
-        display: none;
-      }
-    <%else%>
-      #dislike-comment-btn-<%=comment.id%>{
-        display: none;
-      }
-    <%end%>
-  <%end%>
-</style>
 <div class= "post-body">
   <h1 class="text-center logo">Post</h1>
   <div class="carousel " data-flickity='{ "freeScroll": true }'>
@@ -53,6 +31,10 @@
       <%= user_post_comment_btn(comment)%>
     </div>
     <hr>
+  <% end %>
+  <% if @post.comments.count.zero? %>
+    <br><hr>
+    <p class="text-center text-secondary">No Comments Yet</p>
   <% end %>
 </div>
 <%=javascript_pack_tag 'flickity'%>

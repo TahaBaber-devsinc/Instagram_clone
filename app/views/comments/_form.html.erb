@@ -1,0 +1,18 @@
+<div class="reg-form">
+  <div class="reg-content border">
+    <h2 class="logo"><%= type %> Comment</h2>
+    <div class= "sign-up-text"> <%= type %>    Comment to the Post</div>
+    <hr>
+    <br>
+    <%= form_with model: model_obj do |f| %>
+      <div class="field">
+        <%= f.text_field :body,  placeholder: "#{type} Comment", class: "form-control"%>
+      </div>
+      <div class="actions">
+        <%= f.submit "#{type} Comment" , class: "btn btn-primary full-width"%>
+      </div>
+    <% end %>
+    <br>
+    <hr>
+  </div>
+</div>
