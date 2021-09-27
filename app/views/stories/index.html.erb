@@ -7,7 +7,7 @@
     <%@stories.each do |story|%>
       <%if story.image.attached?%>
         <div class="carousel-cell d-flex ">
-          <%=image_tag story.image, class: "post-pic border"%>
+          <%=image_tag story.image, class: "post-pic story-pic"%>
           <div class="story">
             <%= button_to('Delete', user_story_path(id: story.id), method: :delete, class: "btn btn-danger ")if policy(story).destroy?%>
           </div>

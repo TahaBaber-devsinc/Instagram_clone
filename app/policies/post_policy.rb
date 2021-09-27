@@ -25,4 +25,12 @@ class PostPolicy < ApplicationPolicy
   def destroy?
     @user == @record.user
   end
+
+  def new?
+    !@user.nil?
+  end
+
+  def create?
+    @record.user == @user
+  end
 end

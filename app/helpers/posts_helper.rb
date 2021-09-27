@@ -6,8 +6,8 @@ module PostsHelper
     return unless @post.user_id == current_user.id
 
     content_tag(:div, class: 'del-upd-btn') do
-      button_to('Delete', @post, method: :delete, class: 'btn btn-danger') +
-        button_to('Update', edit_post_path, method: :get, class: 'btn btn-warning')
+      button_to(edit_post_path, method: :get, class: 'btn btn-warning') { render 'edit_icon' } +
+        button_to(@post, method: :delete, class: 'btn btn-danger') { render 'trash' }
     end
   end
 
@@ -15,15 +15,17 @@ module PostsHelper
     return unless comment.user == current_user
 
     content_tag(:div, class: 'del-upd-btn') do
-      button_to('Delete', comment_path(id: comment.id), method: :delete, class: 'btn btn-danger ') +
-        button_to('Update', edit_comment_path(comment.id), method: :get, class: 'btn btn-warning ')
+      button_to(edit_comment_path(comment.id), method: :get, class: 'btn btn-warning ') do
+        render 'edit_icon'
+      end +
+        button_to(comment_path(id: comment.id), method: :delete, class: 'btn btn-danger ') { render 'trash' }
     end
   end
 
   def user_post_comment_btn(comment)
     return unless @post.user == current_user && comment.user != current_user
 
-    button_to 'Delete', comment, method: :delete, class: 'btn btn-danger '
+    button_to(comment, method: :delete, class: 'btn btn-danger ') { render 'trash' }
   end
 
   def comment_like_btn(comment)

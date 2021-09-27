@@ -13,4 +13,8 @@ class FollowshipPolicy < ApplicationPolicy
     id = @record.following_id
     id != @user.id && !@user.followships.exists?(following_id: id)
   end
+
+  def destroy?
+    @record.user_id == @user.id
+  end
 end

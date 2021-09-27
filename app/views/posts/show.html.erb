@@ -32,5 +32,9 @@
     </div>
     <hr>
   <% end %>
+  <% if @post.comments.count.zero? %>
+    <br><hr>
+    <p class="text-center text-secondary">No Comments Yet</p>
+  <% end %>
 </div>
 <%=javascript_pack_tag 'flickity'%>

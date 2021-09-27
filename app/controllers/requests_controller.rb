@@ -2,8 +2,10 @@
 
 # class that handles follow requests
 class RequestsController < ApplicationController
+  before_action :authorize_action, only: %i[create destroy]
   def index
-    @requests = Request.where(followee_id: current_user.id).includes(:user)
+    @requests = Request.includes(:user).where(followee_id: current_user.id)
+    authorize(@requests, policy_class: RequestPolicy)
   end
 
   def create
@@ -18,6 +20,7 @@ class RequestsController < ApplicationController
 
   def accept
     user = User.find(params[:id])
+    authorize(user, policy_class: RequestPolicy)
     RequestAccept.new(user, current_user).call
     redirect_to current_user
   end
@@ -27,5 +30,11 @@ class RequestsController < ApplicationController
     authorize request
     request.destroy
     redirect_to current_user
+  end
+
+  private
+
+  def authorize_action
+    authorize(params[:id], policy_class: RequestPolicy)
   end
 end

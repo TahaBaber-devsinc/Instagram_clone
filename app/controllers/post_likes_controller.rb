@@ -6,14 +6,15 @@ class PostLikesController < ApplicationController
   before_action :already_exist, only: :create
   before_action :authenticate_user!
 
-  # Create authorization
   def create
+    authorize(@post, policy_class: LikePolicy)
     like = @post.likes.new(user_id: current_user.id)
     redirect_to @post, flash: { notice: 'Could not like the Post' } unless like.save
   end
 
   def destroy
     like = @post.likes.find_by!(user_id: current_user.id)
+    authorize like
     redirect_to @post, flash: { notice: 'Could not unlike the Post' } unless like.destroy
   end
 

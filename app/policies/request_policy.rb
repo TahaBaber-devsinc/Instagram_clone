@@ -9,6 +9,22 @@ class RequestPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    !@user.nil?
+  end
+
+  def create?
+    !@user.followees.exists?(@record) && !@user.requests.exists?(followee_id: @record)
+  end
+
+  def destroy?
+    @user.requests.exists?(followee_id: @record)
+  end
+
+  def accept?
+    @record.requests.exists?(followee_id: @user.id)
+  end
+
   def reject?
     @record.followee_id == @user.id
   end

@@ -48,6 +48,8 @@ gem 'spring'
 
 gem 'active_storage_validations'
 
+gem 'figaro'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite

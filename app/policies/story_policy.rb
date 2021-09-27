@@ -13,6 +13,10 @@ class StoryPolicy < ApplicationPolicy
     @user == @record || @record.account_type == 'Public' || @record.followers.exists?(@user.id)
   end
 
+  def create?
+    @record.user == @user
+  end
+
   def destroy?
     @user == @record.user
   end

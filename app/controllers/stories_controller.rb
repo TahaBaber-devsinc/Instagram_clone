@@ -2,9 +2,9 @@
 
 # class for user stories
 class StoriesController < ApplicationController
-  before_action :authenticate_user!
   def create
     story = current_user.stories.new(story_params)
+    authorize story
     if story.save
       StoryJob.set(wait_until: story.expiry).perform_later(story)
       redirect_to user_stories_path

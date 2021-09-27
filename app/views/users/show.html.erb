@@ -5,7 +5,7 @@
       <h3><%= @user.username %></h3>
       <div class="count-info-flex">
         <span class="count-info"><b><%= @user.posts.count %></b> posts</span>
-        <span class="count-info"><b> <%= @user.followers.count %></b> followers</span>
+        <span class="count-info" id="follower-count"><b> <%= @user.followers.count %></b> followers</span>
         <span class="count-info"><b><%= @user.followees.count %></b> following</span>
       </div>
       <h6><b><%= @user.email%></b></h6>
@@ -39,8 +39,8 @@
 
 
       <div class="posts">
-        <%@posts.each do |post|%>
-          <%if post.images.count>0%>
+        <% @posts.each do |post| %>
+          <% if post.images.count > 0 %>
             <%= link_to image_tag(post.images.first, width: "200", height: "200", class: "post-pic border"), post %>
           <% end %>
         <% end %>

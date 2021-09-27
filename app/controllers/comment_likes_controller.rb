@@ -2,17 +2,19 @@
 
 # Class for likes on comments
 class CommentLikesController < ApplicationController
+  before_action :authenticate_user!
   before_action :initialize_comment
   before_action :already_exist, only: :create
-  before_action :authenticate_user!
 
   def create
+    authorize @comment
     like = @comment.likes.new(user_id: current_user.id)
     redirect_to @comment.post, flash: { notice: 'Could not like the comment' } unless like.save
   end
 
   def destroy
     like = @comment.likes.find_by!(user_id: current_user.id)
+    authorize like
     redirect_to @comment.post, flash: { notice: 'Could not unlike the comment' } unless like.destroy
   end
 

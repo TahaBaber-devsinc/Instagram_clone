@@ -3,14 +3,16 @@
 # class for posts controller
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :initialize_post, only: %i[show action update destroy]
+  before_action :initialize_post, only: %i[show edit update destroy]
 
   def new
     @post = Post.new
+    authoriz @post
   end
 
   def create
     @post = current_user.posts.new(post_params)
+    authorize @post
     redirect_to current_user and return if @post.save
 
     error_messages(@post)
@@ -19,10 +21,7 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def edit
-    @post = Post.find(params[:id])
-    authorize @post
-  end
+  def edit; end
 
   def update
     redirect_to @post and return if @post.update(post_params)
