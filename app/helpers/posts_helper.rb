@@ -6,8 +6,8 @@ module PostsHelper
     return unless post.user_id == current_user.id
 
     tag.div(class: 'del-upd-btn') do
-      button_to(edit_post_path, method: :get, class: 'btn btn-warning') { render 'edit_icon' } +
-        button_to(post, method: :delete, class: 'btn btn-danger') { render 'trash' }
+      button_to(edit_post_path, method: :get, class: 'btn btn-warning') { image_tag('edit_icon') } +
+        button_to(post, method: :delete, class: 'btn btn-danger') { image_tag('trash') }
     end
   end
 
@@ -16,9 +16,9 @@ module PostsHelper
 
     tag.div(class: 'del-upd-btn') do
       button_to(edit_comment_path(comment.id), method: :get, class: 'btn btn-warning ') do
-        render 'edit_icon'
+        image_tag('edit_icon')
       end +
-        button_to(comment_path(id: comment.id), method: :delete, class: 'btn btn-danger ') { render 'trash' }
+        button_to(comment_path(id: comment.id), method: :delete, class: 'btn btn-danger ') { image_tag('trash') }
     end
   end
 

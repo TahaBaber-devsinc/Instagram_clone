@@ -8,9 +8,13 @@ class RequestAccept
   end
 
   def call
-    request = @user.requests.find_by(followee_id: @current_user.id)
-    request.destroy
-    followship = @user.followships.build(following_id: @current_user.id)
-    followship.save
+    request.transaction do
+      followship.transaction do
+        request = @user.requests.find_by(followee_id: @current_user.id)
+        request.destroy
+        followship = @user.followships.build(following_id: @current_user.id)
+        followship.save
+      end
+    end
   end
 end

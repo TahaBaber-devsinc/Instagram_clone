@@ -9,7 +9,7 @@ class Story < ApplicationRecord
 
   has_one_attached :image, dependent: :destroy
 
-  after_initialize do
-    self.expiry ||= 24.hours.from_now
+  after_create do
+    StoryJob.set(wait: 24.hours).perform_later(self)
   end
 end
