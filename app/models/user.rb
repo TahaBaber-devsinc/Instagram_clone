@@ -21,9 +21,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :requests, dependent: :destroy
-  has_many :followships
+  has_many :followships, dependent: :destroy
   has_many :followees, through: :followships, dependent: :destroy
-  has_many :inverse_followships, class_name: 'Followship', foreign_key: 'following_id'
+  has_many :inverse_followships, class_name: 'Followship', foreign_key: 'following_id', inverse_of: :followships,
+                                 dependent: :destroy
   has_many :followers, through: :inverse_followships, source: :user, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy

@@ -1,6 +1,6 @@
 <div class="user-page-posts">
   <div class ="user-page">
-    <%= user_profile_pic%>
+    <%= user_profile_pic(@user)%>
     <div class = "profile-info">
       <h3><%= @user.username %></h3>
       <div class="count-info-flex">
@@ -11,17 +11,17 @@
       <h6><b><%= @user.email%></b></h6>
     </div>
     <% if current_user != @user %>
-        <%= public_user_btn %>
-        <%= private_user_btn%>
+      <%= public_user_btn(@user) %>
+      <%= private_user_btn(@user) %>
     <%else%>
       <div class="d-flex flex-column">
         <%= account_btn %>
-        <%= story_btn %>
+        <%= story_btn(@user) %>
       </div>
     <%end%>
   </div>
   <hr>
-  <% unless @user != current_user && !@user.followers.exists?(current_user.id) && @user.account_type == 'Private' %>
+  <% unless condition(@user) %>
     <div class="user-posts">
       <div class="user-post-heading">
         <h2 class="text-center">Posts</h2>
@@ -32,12 +32,10 @@
         </div>
       </div>
       <% if @posts.count == 0 %>
-        <br><hr>
+        <br>
+        <hr>
         <p class="text-center text-secondary">No posts Yet</p>
-
       <% end %>
-
-
       <div class="posts">
         <% @posts.each do |post| %>
           <% if post.images.count > 0 %>

@@ -14,12 +14,17 @@ AllCops:
     - "vendor/bundle/**/*"
     - "bin/**/*"
 
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - "db/migrate/20210906154409_create_active_storage_tables.active_storage.rb"
 
 Metrics/LineLength:
   Max: 120
 
 Metrics/MethodLength:
   Max: 23
+  Exclude:
+    - "db/migrate/20210906154409_create_active_storage_tables.active_storage.rb"
 
 Metrics/BlockLength:
   Exclude:
@@ -32,3 +37,7 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrate/20210906154409_create_active_storage_tables.active_storage.rb"
