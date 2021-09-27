@@ -8,8 +8,8 @@ class RequestAccept
   end
 
   def call
-    request.transaction do
-      followship.transaction do
+    Request.transaction do
+      Followship.transaction do
         request = @user.requests.find_by(followee_id: @current_user.id)
         request.destroy
         followship = @user.followships.build(following_id: @current_user.id)

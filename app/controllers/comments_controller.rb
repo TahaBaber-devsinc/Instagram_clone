@@ -26,9 +26,12 @@ class CommentsController < ApplicationController
   def edit; end
 
   def update
-    redirect_to @comment.post, flash: { notice: 'Updated comment successfully' } and return if @comment.update(comment_params)
+    if @comment.update(comment_params)
+      redirect_to @comment.post,
+                  flash: { notice: 'Updated comment successfully' } and return
+    end
 
-    redirect_to edit_comment_path(params[:id]), flash: {notice: "Can't leave comment blank"}
+    redirect_to edit_comment_path(params[:id]), flash: { notice: "Can't leave comment blank" }
   end
 
   private
