@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def error_occurred(exception)
-    render html: helpers.tag.h1(exception.message), status: 404
+    render html: helpers.tag.h1(exception.message), status: :not_found
   end
 
   def user_not_authorized

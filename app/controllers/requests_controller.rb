@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    @request = current_user.requests.find_by_followee_id(params[:id])
+    @request = current_user.requests.find_by(followee_id: params[:id])
     redirect_to user_path(params[:id]), flash: { notice: 'Cannot cancel' } unless @request.destroy
   end
 

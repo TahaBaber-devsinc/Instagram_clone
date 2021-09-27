@@ -1,20 +1,20 @@
 <div class= "post-body">
   <h1 class="text-center logo">Post</h1>
   <div class="carousel " data-flickity='{ "freeScroll": true }'>
-    <%@post.images.each do |image|%>
-      <%= image_tag(image, class: "post-pic border carousel-cell")%>
-    <%end%>
+    <% @post.images.each do |image| %>
+      <%= image_tag(image, class: "post-pic border carousel-cell") %>
+    <% end %>
   </div>
-  <h3><%=@post.user.username%></h3>
-  <%=@post.body%>
+  <h3><%= @post.user.username %></h3>
+  <%= @post.body %>
   <br>
   <span class= "like-count">
-    <%=@post.likes.count%>
+    <%= @post.likes.count %>
   </span>
   <b>likes</b>
   <div class= "post-btn">
-    <%= post_like_btn%>
-    <%= user_post_btn%>
+    <%= post_like_btn(@post) %>
+    <%= user_post_btn(@post) %>
   </div>
   <hr>
   <div class="add-comment-btn">
@@ -28,12 +28,13 @@
     <div class="post-btn">
       <%= comment_like_btn(comment)%>
       <%= user_comment_btn(comment)%>
-      <%= user_post_comment_btn(comment)%>
+      <%= user_post_comment_btn(@post, comment)%>
     </div>
     <hr>
   <% end %>
   <% if @post.comments.count.zero? %>
-    <br><hr>
+    <br>
+    <hr>
     <p class="text-center text-secondary">No Comments Yet</p>
   <% end %>
 </div>

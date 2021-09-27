@@ -5,5 +5,5 @@ class Followship < ApplicationRecord
   validates :following_id, presence: true
 
   belongs_to :user
-  belongs_to :followee, class_name: 'User', foreign_key: 'following_id'
+  belongs_to :followee, class_name: 'User', foreign_key: 'following_id', inverse_of: :followers
 end
