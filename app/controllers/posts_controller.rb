@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     authorize @post
-    redirect_to current_user and return if @post.save
+    redirect_to current_user, flash: { notice: 'Added post successfully' } and return if @post.save
 
     error_messages(@post)
     redirect_to new_post_path
@@ -23,14 +23,14 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    redirect_to @post and return if @post.update(post_params)
+    redirect_to @post, flash: { notice: 'updated post successfully' } and return if @post.update(post_params)
 
     error_messages(@post)
     redirect_to edit_post_path
   end
 
   def destroy
-    flash[:notice] = 'Could not Delete' unless @post.destroy
+    flash[:notice] = @post.destroy ? 'Deleted successfully' : 'Could not Delete'
     redirect_to current_user
   end
 

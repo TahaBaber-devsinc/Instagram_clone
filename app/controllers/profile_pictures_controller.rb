@@ -10,7 +10,10 @@ class ProfilePicturesController < ApplicationController
   def update
     current_user.image.attach(picture_params[:image])
     authorize current_user
-    redirect_to current_user and return if current_user.image.persisted?
+    if current_user.image.persisted?
+      redirect_to current_user,
+                  flash: { notice: 'updated image successfully' } and return
+    end
 
     error_messages(current_user)
     redirect_to new_user_profile_picture_path

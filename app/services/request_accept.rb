@@ -2,15 +2,19 @@
 
 # service class for accepting requests
 class RequestAccept
+  attr_reader :user, :current_user
+
   def initialize(user, current_user)
     @user = user
     @current_user = current_user
   end
 
   def call
-    request = @user.requests.find_by(followee_id: @current_user.id)
-    request.destroy
-    followship = @user.followships.build(following_id: @current_user.id)
-    followship.save
+    Request.transaction do
+      Followship.transaction do
+        user.requests.find_by(followee_id: current_user.id).destroy
+        user.followships.create(following_id: current_user.id)
+      end
+    end
   end
 end

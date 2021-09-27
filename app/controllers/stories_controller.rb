@@ -5,18 +5,16 @@ class StoriesController < ApplicationController
   def create
     story = current_user.stories.new(story_params)
     authorize story
-    if story.save
-      StoryJob.set(wait_until: story.expiry).perform_later(story)
-      redirect_to user_stories_path
-    else
-      error_messages(story) and redirect_to new_user_story_path
-    end
+
+    redirect_to user_stories_path, flash: { notice: 'Added successfully' } and return if story.save
+
+    error_messages(story) and redirect_to new_user_story_path
   end
 
   def destroy
     story = Story.find(params[:id])
     authorize story
-    flash[:notice] = 'Story not found' unless story.destroy
+    flash[:notice] = story.destroy ? 'destroyed successfully' : 'Story not found'
     redirect_to user_stories_path
   end
 

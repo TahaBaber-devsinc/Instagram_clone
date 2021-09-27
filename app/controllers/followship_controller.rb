@@ -11,6 +11,6 @@ class FollowshipController < ApplicationController
   def destroy
     followship = current_user.followships.find_by(following_id: params[:following_id])
     authorize followship
-    redirect_to user_path(params[:following_id]), flash: { notice: 'could not unfollow' } unless followship.destroy
+    redirect_to user_path(params[:following_id]), flash: { notice: 'Could not unfollow' } unless followship.destroy
   end
 end
