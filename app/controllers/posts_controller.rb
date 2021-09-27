@@ -2,12 +2,11 @@
 
 # class for posts controller
 class PostsController < ApplicationController
-  before_action :authenticate_user!
   before_action :initialize_post, only: %i[show edit update destroy]
 
   def new
     @post = Post.new
-    authoriz @post
+    authorize @post
   end
 
   def create

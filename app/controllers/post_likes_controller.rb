@@ -4,7 +4,6 @@
 class PostLikesController < ApplicationController
   before_action :initialize_post
   before_action :already_exist, only: :create
-  before_action :authenticate_user!
 
   def create
     authorize(@post, policy_class: LikePolicy)

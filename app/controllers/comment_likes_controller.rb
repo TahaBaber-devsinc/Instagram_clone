@@ -2,7 +2,6 @@
 
 # Class for likes on comments
 class CommentLikesController < ApplicationController
-  before_action :authenticate_user!
   before_action :initialize_comment
   before_action :already_exist, only: :create
 

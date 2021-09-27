@@ -2,7 +2,6 @@
 
 # class for comments on posts
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :initialize_post, only: %i[new create]
   before_action :initialize_comment, only: %i[destroy edit update]
 
