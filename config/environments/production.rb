@@ -49,6 +49,8 @@ Rails.application.configure do
   config.active_storage.service = :cloudinary
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.assets.compile = true
+  config.assets.digest = true
 
   config.assets.precompile += ['bootstrap.css']
 
