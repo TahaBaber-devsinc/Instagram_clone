@@ -3,7 +3,7 @@
 # class for users
 class UsersController < ApplicationController
   before_action :authorize_user
-  rescue_from ActiveRecord::ActiveRecordError, with: :handle_exception
+  rescue_from ActiveRecord::ActiveRecordError, with: :handle_active_record_exception
 
   def index
     @users = params[:search].blank? ? User.all : User.search(params[:search])
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     authorize(current_user, policy_class: UserPolicy)
   end
 
-  def handle_exception(exception)
+  def handle_active_record_exception(exception)
     redirect_to current_user, flash: { notice: exception.message }
   end
 end
