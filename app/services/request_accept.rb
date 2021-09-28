@@ -10,11 +10,9 @@ class RequestAccept
   end
 
   def call
-    Request.transaction do
-      Followship.transaction do
-        user.requests.find_by(followee_id: current_user.id).destroy
-        user.followships.create(following_id: current_user.id)
-      end
+    ActiveRecord::Base.transaction do
+      user.requests.find_by!(followee_id: @current_user.id).destroy
+      user.followships.create!(following_id: @current_user.id)
     end
   end
 end

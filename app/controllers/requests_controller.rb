@@ -23,6 +23,8 @@ class RequestsController < ApplicationController
     authorize(user, policy_class: RequestPolicy)
     RequestAccept.new(user, current_user).call
     redirect_to current_user
+  rescue ActiveRecord::ActiveRecordError => e
+    redirect_to current_user, flash: { notice: e.message }
   end
 
   def reject
