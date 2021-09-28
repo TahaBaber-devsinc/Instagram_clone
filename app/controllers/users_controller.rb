@@ -3,6 +3,7 @@
 # class for users
 class UsersController < ApplicationController
   before_action :authorize_user
+  rescue_from ActiveRecord::ActiveRecordError, with: :handle_exception
 
   def index
     @users = params[:search].blank? ? User.all : User.search(params[:search])
@@ -16,13 +17,15 @@ class UsersController < ApplicationController
   def update
     Request.where(followee_id: current_user.id).each { |request| RequestAccept.new(request.user, current_user).call }
     current_user.update(account_type: User.account_types[current_user.account_type] ^ 1)
-    rescue ActiveRecord::ActiveRecordError => e
-       redirect_to current_user, flash: { notice: e.message }
   end
 
   private
 
   def authorize_user
     authorize(current_user, policy_class: UserPolicy)
+  end
+
+  def handle_exception(exception)
+    redirect_to current_user, flash: { notice: exception.message }
   end
 end
