@@ -14,7 +14,5 @@ class RequestAccept
       user.requests.find_by!(followee_id: @current_user.id).destroy
       user.followships.create!(following_id: @current_user.id)
     end
-  rescue ActiveRecord::RecordNotFound => e
-    redirect_to @current_user, flash: { notice: e }
   end
 end

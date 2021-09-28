@@ -16,6 +16,8 @@ class UsersController < ApplicationController
   def update
     Request.where(followee_id: current_user.id).each { |request| RequestAccept.new(request.user, current_user).call }
     current_user.update(account_type: User.account_types[current_user.account_type] ^ 1)
+    rescue ActiveRecord::ActiveRecordError => e
+       redirect_to current_user, flash: { notice: e.message }
   end
 
   private
